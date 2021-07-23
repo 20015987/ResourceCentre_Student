@@ -226,8 +226,7 @@ public class ResourceCentre {
 		}
 	}
 
-	public static boolean doLoanChromebook(ArrayList<Chromebook> chromebookList, String tag, String dueDate) {
-		// write your code here
+	public static boolean doLoanChromebook(ArrayList<Chromebook> chromebookList, String tag, String dueDate) { // Done by: Ammar
 		
 		boolean isLoaned = false;
 
@@ -245,10 +244,18 @@ public class ResourceCentre {
 		return isLoaned;
 		
 	}
-	public static void loanChromebook(ArrayList<Chromebook> chromebookList) {
-		// write your code here
-
-
+	public static void loanChromebook(ArrayList<Chromebook> chromebookList) { // Done by: Ammar
+		
+		ResourceCentre.viewAllChromebook(chromebookList);
+		String tag = Helper.readString("Enter asset tag > ");
+		String due = Helper.readString("Enter due date > ");
+		Boolean isLoaned =doLoanChromebook(chromebookList, tag, due);
+		if (isLoaned == false) {
+			System.out.println("Invalid asset tag");
+		} else {
+			System.out.println("Chromebook " + tag + " loaned out");
+		}
+		
 	}
 
 	//================================= Option 4 Return an item (CRUD - Update)=================================
