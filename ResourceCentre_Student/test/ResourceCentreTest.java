@@ -55,6 +55,20 @@ public class ResourceCentreTest {
 	public void testAddChromebook() {
 		//fail("Not yet implemented");
 		// write your code here
+		assertNotNull("Test if there is valid chromebook arraylist to add to", chromebookList);
+
+		//Given an empty list, after adding 1 item, the size of the list is 1
+		ResourceCentre.addChromebook(chromebookList, cb1);		
+		assertEquals("Test if that Camcorder arraylist size is 1?", 1, chromebookList.size());
+
+		//The item just added is as same as the first item of the list
+		assertSame("Test that chromebook is added same as 1st item of the list?", cb1, chromebookList.get(0));
+
+		//Add another item. test The size of the list is 2?
+		ResourceCentre.addChromebook(chromebookList, cb2);
+		assertEquals("Test that Chromebook arraylist size is 2?", 2, chromebookList.size());
+
+		assertSame("Test that second Chromebook item added is the same as the second item in the list", cb2, chromebookList.get(1));
 	}
 
 	@Test
@@ -86,6 +100,23 @@ public class ResourceCentreTest {
 		//fail("Not yet implemented");
 		// write your code here
 		// Test if Item list is not null but empty, so that can add a new item
+		assertNotNull("Test if there is valid chromebook arraylist to add to", chromebookList);
+
+		String allChromebook = ResourceCentre.retrieveAllChromebook(chromebookList);
+		String testOutput = "";
+		assertEquals("Check that ViewAllCamcorderlist", testOutput, allChromebook);
+
+		ResourceCentre.addChromebook(chromebookList, cb1);
+		ResourceCentre.addChromebook(chromebookList, cb2);
+		assertEquals("Test if that chromebook arraylist size is 2?", 2, chromebookList.size());
+
+		allChromebook = ResourceCentre.retrieveAllChromebook(chromebookList);
+
+		testOutput = String.format("%-10s %-30s %-10s %-10s %-20s\n","CB0011", "ASUS Chromebook", "Yes", "Win 10");
+		testOutput += String.format("%-10s %-30s %-10s %-10s %-20s\n","CB0012", "HP Chromebook", "Yes", "Win 10");
+
+		assertEquals("Check that ViewAllChromebookList", testOutput, allChromebook);
+
 
 	}
 
