@@ -116,14 +116,14 @@ public class ResourceCentreTest {
 		testOutput += String.format("%-10s %-30s %-10s %-10s %-20s\n","CB0012", "HP Chromebook", "Yes", "Win 10");
 
 		assertEquals("Check that ViewAllChromebookList", testOutput, allChromebook);
-
+ 
 	}
 
 	@Test
 	public void testDoLoanCamcorder() {
 		//fail("Not yet implemented");
 		// write your code here
-
+		
 	}
 
 	@Test
