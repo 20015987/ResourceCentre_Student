@@ -47,6 +47,9 @@ public class ResourceCentreTest {
 		//Add another item. test The size of the list is 2?
 		ResourceCentre.addCamcorder(camcorderList, cc2);
 		assertEquals("Test that Camcorder arraylist size is 2?", 2, camcorderList.size());
+		
+		// TC5
+		assertSame("Test that second Camcorder item added is the same as the second item in the list", cc2, camcorderList.get(1));
 	}
 	@Test
 	public void testAddChromebook() {
