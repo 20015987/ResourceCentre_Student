@@ -52,9 +52,20 @@ public class ResourceCentreTest {
 		assertSame("Test that second Camcorder item added is the same as the second item in the list", cc2, camcorderList.get(1));
 	}
 	@Test
-	public void testAddChromebook() {
-		//fail("Not yet implemented");
-		// write your code here
+	public void testAddChromebook() { // Done by: Ammar
+		
+		assertNotNull("Test if there is a valid Chromebook arraylist to add to", chromebookList);
+		
+		ResourceCentre.addChromebook(chromebookList, cb1);
+		assertEquals("Given an empty list, after adding 1 chomebook, the size of the list is 1", 1, chromebookList.size());
+		
+		assertSame("Test that the Chromebook added is the same as 1st item of the list", cb1, chromebookList.get(0));
+		
+		ResourceCentre.addChromebook(chromebookList, cb2);
+		assertEquals("Given a list with 1 Chromebook, after adding another chromebook, the size of the list is 2", 2, chromebookList.size());
+		
+		assertSame("Test that the second Chromebook item added is the same as the second item in the list", cb2, chromebookList.get(1));
+		
 	}
 	
 	@Test
@@ -113,9 +124,24 @@ public class ResourceCentreTest {
 	}
 
 	@Test
-	public void testDoLoanCamcorder() {
-		//fail("Not yet implemented");
-		// write your code here
+	public void testDoLoanCamcorder() { // Done by: Ammar
+		
+		assertNotNull("Test if camcorderList exists.", camcorderList);
+		
+		ResourceCentre.addCamcorder(camcorderList, cc1);
+		Boolean loanCamcorder = ResourceCentre.doLoanCamcorder(camcorderList, "CC0011", "23-7-2021");
+		assertTrue("Test that available item can be loaned.", loanCamcorder);
+		
+		loanCamcorder = ResourceCentre.doLoanCamcorder(camcorderList, "CC0011", "23-7-2021");
+		assertFalse("Test that the same item cannot be loaned again.", loanCamcorder);
+		
+		ResourceCentre.addCamcorder(camcorderList, cc2);
+		cc2.setIsAvailable(false);
+		loanCamcorder = ResourceCentre.doLoanCamcorder(camcorderList, "CC0012", "23-7-2021");
+		assertFalse("Test that the unavailable items cannot be loaned", loanCamcorder);
+		
+		loanCamcorder = ResourceCentre.doLoanCamcorder(camcorderList, "CC0013", "23-7-2021");
+		assertFalse("Test that non-existing items cannot be loaned", loanCamcorder);
 		
 	}
 	
@@ -151,15 +177,48 @@ public class ResourceCentreTest {
 	}
 	
 	@Test
-	public void testDoReturnCamcorder() {
-		//fail("Not yet implemented");
-		// write your code here
+	public void testDoReturnCamcorder() { // Done by: Ammar
+		
+		ResourceCentre.addCamcorder(camcorderList, cc1);
+		cc1.setIsAvailable(false);
+		Boolean returnCamcorder = ResourceCentre.doReturnCamcorder(camcorderList, "CC0011");
+		assertTrue("Test that the item is unavailable before return", returnCamcorder);
+		
+		cc1.setIsAvailable(true);
+		returnCamcorder = ResourceCentre.doReturnCamcorder(camcorderList, "CC0011");
+		assertFalse("Test that cannot return available items", returnCamcorder);
+		
+		returnCamcorder = ResourceCentre.doReturnCamcorder(camcorderList, "CC0013");
+		assertFalse("Test that non-existing items cannot be returned", returnCamcorder);
+		
+		assertNotNull("Test that the camcorderList exists", camcorderList);
+		
+		ResourceCentre.doLoanCamcorder(camcorderList, "CC0011", "23-7-2021");
+		ResourceCentre.doReturnCamcorder(camcorderList, "CC0011");
+		assertSame("Test that the due date is deleted after returning","",cc1.getDueDate());
 		
 	}
 	@Test
 	public void testDoReturnChromebook() {
-		//fail("Not yet implemented");
-		// write your code here
+		
+		ResourceCentre.addChromebook(chromebookList, cb1);
+		cb1.setIsAvailable(false);
+		Boolean returnChromebook = ResourceCentre.doReturnChromebook(chromebookList, "CB0011");
+		assertTrue("Test that the item is unavailable before return", returnChromebook);
+		
+		cb1.setIsAvailable(true);
+		returnChromebook = ResourceCentre.doReturnChromebook(chromebookList, "CB0011");
+		assertFalse("Test that cannot return available items", returnChromebook);
+		
+		returnChromebook = ResourceCentre.doReturnChromebook(chromebookList, "CB0013");
+		assertFalse("Test that non-existing items cannot be returned", returnChromebook);
+		
+		assertNotNull("Test that the chromebookList exists", chromebookList);
+		
+		ResourceCentre.doLoanChromebook(chromebookList, "CB0011", "23-7-2021");
+		ResourceCentre.doReturnChromebook(chromebookList, "CB0011");
+		assertSame("Test that the due date is deleted after returning","",cb1.getDueDate());
+		
 	}
 	
 	@After
